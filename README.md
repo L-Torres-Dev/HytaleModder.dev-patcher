@@ -28,7 +28,7 @@ one of these:
   - `mvn`
 ## Usage
 
-All commands should be ran from inside the venv, hence `python` is the right command to invoke python.
+All commands should be run from inside the venv, hence `python` is the right command to invoke python.
 
 First run this:
 ```shell
@@ -40,11 +40,11 @@ It will
 - set up a Maven project in `hytale-server` with the decompiled code
 
 You can then open the `hytale-server` folder in your favorite IDE and begin exploring the code. For *IntelliJ IDEA*,
-you must first setup the SDK. After opening the project (you can open the `pom.xml` file, IDEA will prompt you to open
+you must first set up the SDK. After opening the project (you can open the `pom.xml` file, IDEA will prompt you to open
 the entire project) press Ctrl+Alt+Shift+S and under _Project_ configure SDK and Language level to *25*.
 
 If IDEA does not offer an option to run the main file, right-click the `src` folder -> Mark Directory As -> Sources Root
-then reload the maven project:
+then reload the maven project:  
 ![_readme_images/img.png](_readme_images/img.png)  
 It is located in the "m" icon on the right side:  
 ![_readme_images/m.png](_readme_images/m.png)  
