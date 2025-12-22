@@ -105,8 +105,3 @@ def decompile(jar_in: Path, out_dir: Path):
 
 if __name__ == "__main__":
     pre_init()
-
-    jar_path = Constants.DOWNLOADS_DIR / "minigui.jar"
-    download_server_jar(jar_path)
-
-    decompile(jar_path, Constants.DECOMPILE_DIR)
