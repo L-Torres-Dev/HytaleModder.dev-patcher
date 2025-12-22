@@ -2,6 +2,8 @@ from common import *
 import sys
 import shutil
 
+USE_MAVEN = True
+
 
 if __name__ == "__main__":
     actions = ("setup", "makePatches", "applyPatches")
@@ -31,6 +33,27 @@ if __name__ == "__main__":
         # TODO: apply patches after setup
 
         # initialize project directory
-        Constants.PROJECT_DIR.mkdir(parents=True, exist_ok=True)
-        src = Constants.PROJECT_DIR / "src"
+        if not USE_MAVEN:
+            # raw intellij build system:
+            Constants.PROJECT_DIR.mkdir(parents=True, exist_ok=True)
+            src = Constants.PROJECT_DIR / "src"
+            src.mkdir(parents=True, exist_ok=True)
+        else:
+            # Maven initialization:
+            # mvn archetype:generate -DgroupId=com.hypixel.hytale -DartifactId=hytale-server -DarchetypeArtifactId=maven‑archetype‑quickstart -DinteractiveMode=false
+            logger.info("\n\nInitializing Maven project in:\n{}\n\n", Constants.PROJECT_DIR)
+
+            subprocess.run([
+                "mvn", "archetype:generate",
+                # "-DgroupId=com.hypixel.hytale", "-DartifactId=hytale-server",
+                "-DgroupId=dev.ribica.hytalemodding", "-DartifactId=" + Constants.PROJECT_DIR.name,
+                "-DarchetypeArtifactId=maven-archetype-quickstart", "-DinteractiveMode=false"
+            ], check=True, shell=True)
+
+            logger.info("Maven project initialized!")
+
+            src = Constants.PROJECT_DIR / "src" / "main" / "java"
+
+        shutil.rmtree(src)
         shutil.copytree(Constants.DECOMPILE_DIR, src)
+

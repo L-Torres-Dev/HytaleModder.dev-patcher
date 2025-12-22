@@ -14,7 +14,7 @@ class Constants:
     DOWNLOADS_DIR = WORK_DIR / "download"
     DECOMPILE_DIR = WORK_DIR / "decompile"
     PATCHES_DIR = BASE_DIR / "patches"
-    PROJECT_DIR = BASE_DIR / "project"
+    PROJECT_DIR = BASE_DIR / "hytale-server"
 
 
     @staticmethod
