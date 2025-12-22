@@ -65,18 +65,24 @@ def apply_source_patches():
         # Copy original to target, stripping CR
         target_file.parent.mkdir(parents=True, exist_ok=True)
 
-        content = original_file.read_bytes().replace(b'\r', b'')
+        content = original_file.read_bytes()
         target_file.write_bytes(content)
 
         # Apply patch
         try:
-            subprocess.run(
-                ["git", "apply", "-p1", str(patch_file.absolute())],
-                cwd=str(src_root),
+            # Run from project root with --directory to handle paths correctly
+            relative_src_path = src_root.relative_to(Constants.PROJECT_DIR)
+            # Use forward slashes for git directory argument
+            directory_arg = str(relative_src_path).replace(os.sep, '/')
+
+            out = subprocess.run(
+                ["git", "apply", f"--directory={directory_arg}", "-p1", str(patch_file.absolute())],
+                cwd=str(Constants.PROJECT_DIR),
                 check=True,
-                capture_output=True
+                capture_output=True,
+                text=True
             )
-            logger.info("Applied patch {}", rel_path)
+            logger.info("Applied patch {}, out={}", rel_path, out.stdout.strip())
         except subprocess.CalledProcessError as e:
             logger.error("Failed to apply patch {}: {}", rel_path, e.stderr.decode().strip())
 
@@ -112,7 +118,7 @@ def make_source_patches():
             t_orig.write_bytes(original_file.read_bytes().replace(b'\r', b''))
             t_mod.write_bytes(file_path.read_bytes().replace(b'\r', b''))
 
-            cmd = ["git", "diff", "--no-index", "--minimal",
+            cmd = ["git", "diff", "--no-index", "--minimal", "--no-prefix",
                    f"a/{rel_path.as_posix()}",
                    f"b/{rel_path.as_posix()}"]
 
