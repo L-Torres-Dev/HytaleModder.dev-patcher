@@ -1,8 +1,27 @@
 # Patcher
 
-This patcher allows us to accept contributions for the JavaDocs on the Hytale Server API without needing to publish the decompiled code.
+This patcher allows you to more easily prepare an environment for exploring the Hytale Server without publishing the decompiled code.
 
-## Contributing
+
+
+
+## Setup
+
+* Clone this repository and `cd` into it.
+
+* Create a Python virtual environment in the `.venv` folder. The command for this varies by platform but it is probably 
+one of these: 
+  - `python -m venv .venv`
+  - `python3 -m venv .venv` (Linux)
+  - `py -3.13 -m venv .venv` (Windows)  
+
+  In the last one, specifying the version is recommended if you have multiple Pythons installed.
+
+* Activate the virtual environment:
+  - Windows: `".venv\Scripts\activate"`  (including the quotes)
+  - Linux/Mac: `source .venv/bin/activate`
+
+## Contributing (work in progress)
 
 1. Decompile the server jar in `/work/decompile`
 2. Run the `applyPatches.py` file to apply the current patches
