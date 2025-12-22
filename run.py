@@ -2,6 +2,8 @@ from common import *
 import sys
 import shutil
 
+from python_git_wrapper import Repository
+
 USE_MAVEN = True
 
 
@@ -56,4 +58,15 @@ if __name__ == "__main__":
 
         shutil.rmtree(src)
         shutil.copytree(Constants.DECOMPILE_DIR, src)
+
+        repo_gitignore = Constants.PROJECT_DIR / ".gitignore"
+        repo_gitignore.write_text("\n".join(("target/", ".idea/", "out/", "*.iml", "*.class")))
+
+        repo = Repository(str(Constants.PROJECT_DIR))
+        repo.add_files(all_files=True)
+        repo.commit("Initial decompilation")
+
+
+
+        print(repo)
 
