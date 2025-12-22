@@ -74,7 +74,17 @@ def pre_init():
     Constants.ensure_dirs()
 
 
+def download_server_jar(out_path: Path):
+    # TODO: replace with actual Hytale server jar after release
+
+    if not out_path.exists():
+        logger.info("Downloading jar...")
+        wget.download("https://cdn.ribica.dev/minigui.jar", out=str(out_path))
+
 
 
 if __name__ == "__main__":
     pre_init()
+
+    jar_path = Constants.DOWNLOADS_DIR / "minigui.jar"
+    download_server_jar(jar_path)
