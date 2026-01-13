@@ -54,7 +54,6 @@ def pre_init():
 
 
 def download_server_jar(out_path: Path):
-    # TODO: replace with actual Hytale server jar after release
     if os.path.isfile('HytaleServer.jar'):
         logger.info("Using local HytaleServer.jar, copying to {}", out_path)
         shutil.copyfile('HytaleServer.jar', out_path)
