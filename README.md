@@ -2,7 +2,12 @@
 
 This ~~patcher~~ allows you to more easily prepare an environment for exploring the Hytale Server without publishing the decompiled code.
 
+# Why?
 
+When you add a compiled jar as a library, IntelliJ only decompiles class by class and doesn't let you search it. For example, you cannot right click some class and then Find Usages. This script will give you a ready to use Hytale server code as a project where you can explore anything you want.
+
+
+If anything goes wrong, please ping @7o1 in [this post](https://discord.com/channels/1440173445039132724/1460707397189238785) in the Hytale Modding discord server
 
 
 ## Setup
@@ -30,6 +35,8 @@ one of these:
   - `java` you need JDK 25 or newer
   - `jar` (comes with JDK inside the bin folder)
   - `mvn`
+
+### **YOU MUST HAVE THEM INSTALLED! TRY `git --version`, `mvn --version`, etc. IN THE CMD BEFORE RUNNING PYTHON CODE!**
  
 
 ## Usage
