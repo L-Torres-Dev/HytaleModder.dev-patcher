@@ -34,7 +34,7 @@ def ensure_java():
 
 def ensure_git():
     try:
-        _ = subprocess.run("git --version", capture_output=True, text=True, check=True)
+        _ = subprocess.run(["git", "--version"], capture_output=True, text=True, check=True)
         logger.info("Git check success: {}", _.stdout.strip())
     except (FileNotFoundError, subprocess.CalledProcessError):
         logger.error("Git not found! Please make sure Git is installed and available in your system PATH.")
@@ -43,7 +43,7 @@ def ensure_git():
 
 def ensure_jar():
     try:
-        _ = subprocess.run("jar --version", capture_output=True, text=True, check=True)
+        _ = subprocess.run(["jar", "--version"], capture_output=True, text=True, check=True)
         logger.info("Jar utility check success: {}", _.stdout.strip())
     except (FileNotFoundError, subprocess.CalledProcessError):
         logger.error("Please make sure JDK is properly installed and the corresponding bin folder is on PATH.")
